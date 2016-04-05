@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * A basic Drupal 8 Hello World Module.
+ */
+
+/**
+ * Implements hello_world_menu().
+ */
+function hello_world_menu() {
+ 
+  $items['hello/world'] = array(
+    'title' => 'Hello World',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'access arguments' => array('access content'),
+  );
+}
+
+/**
+ * Implements hello_world_permission().
+ * Hook permission sets up a permission to gate contenton the admin/people/permissions page.
+ * In the hello_world.routing.yml file you'll see we gate our content by requiring the user's 
+ * role have the 'View Hello World module' permission to 
+ * view the content that the module creates.
+ */
+function hello_world_permission() {
+  $permissions = array(
+    'view hello world' => array(
+      'title' => t('View Hello World module'),
+      'description' => t('View the settings for Hello World module.'),
+    ),
+  );
+ return $permissions;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hello_world_theme() {
+  return array(
+    'hello_world_primary_page' => array(
+      'function' => 'theme_hello_world_primary_page',
+      'variables' => array(
+        'items' => NULL,
+      ),
+      'file' => 'hello_world.theme.inc',
+    ),
+  );
+}
